@@ -1,0 +1,672 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 9em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD24\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">9/20/2024</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">11:13:23 PM</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:01</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc" class="file"><acronym title="C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc">C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">108</td></tr>
+</table>
+</td>
+</table><a name="IDG30KWBPUURKTLKROXHD11QE4WLBSS52WPDSTRMEKAZL324ZI14TH"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDIO32CAEH2WIDMBMT3EXHA0JZFTW24CSMAZPEL35VXWKPBAWISB">Clearance Constraint (Gap=0.3mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDCQHDL2H4ZJQ4HUNLRJKYUNBJF1JADA2ZZNURJSI3EBCIDNG51I">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDKC24C51LOLVRPMC5XOK3VPU0ZP53B0XHGH0SJBFHIZAZSB1HJ25L">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">37</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDWU1J0QTA1KQOETHUS4OKRJDOHXZKXWA2DZCL1LRE1F5G2MSYME">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDCFK1DWQAK3VHFNR0IRQNQ3VFSLJF1B2JMEGK2HOOXOKCEVJO3PRC">Width Constraint (Min=0.3mm) (Max=1mm) (Preferred=0.5mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID5RM3XU4AGL5QI2YXST3OLBWHIKRE3DQBLH1NUDNQ4SL04VWA2BFH">Routing Topology Rule(Topology=Shortest) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID5EUTMXW53WLWB4YPN4Y0VFD4HDRYTKEXFAB3RMEGTGZERJBF4PL">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID2T5YHY03TWZ5EIMNHXSZRXPZ1NISXSTOIYOX3JCGSU4SIXRCITCE">Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDDHJQYFBBVA4ZOWYZM5XDPMMVMOHT2PMH1ABUY2OWB1PA52K15UGF">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDHJRMYBIPNLNVDUEXA0RLPASSEJ4T5EIP2QFZPODGKZ2PV5KPPQOM">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">19</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDZZ1IOMFZUEUT4YCSL5C4HCMU254QLVDXO41QPFAC0NGNQSTF4B">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</a></td>
+<td class="column2">48</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDQJUITHESAQ5PBYR54B303Y4R3NSIOCXTTTC33CJ3VUIDEZXLDWL">Silk to Silk (Clearance=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDNAK4ZJLE4VLANNHMYPU5FQTNDHMCKGRBZY5H1KGHJN01JQ002EOD">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDXUY5PA0LSNYYJBVNFPZ2EJZC0KFNCX5ZE2GDYKO5ZCUOG4GC55ZN">Room DRV8874 motor driver (Bounding Region = (30.444mm, 100.537mm, 129.758mm, 122.508mm) (InComponentClass('DRV8874 motor driver'))</a></td>
+<td class="column2">4</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDVZAA1BRAJWU2KKR5XK52515WNDPWBTY2IT3CP1DSEHSGWOVAN5DH">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">108</td>
+</tr>
+</table><br><a name="IDKC24C51LOLVRPMC5XOK3VPU0ZP53B0XHGH0SJBFHIZAZSB1HJ25L"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Un-Routed Net Constraint ( (All) )</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4294.15mil|Location2.X=4568.803mil|Location1.Y=4624.465mil|Location2.Y=4671.835mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4294.15mil|Location2.X=4568.803mil|Location1.Y=4624.465mil|Location2.Y=4671.835mil|Absolute=True">Un-Routed Net Constraint: Net VM Between Pad C4-1(83.948mm,92.563mm) on Top Layer And Pad C1-1(90.171mm,92.563mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4539.15mil|Location2.X=5024.709mil|Location1.Y=4550.921mil|Location2.Y=4671.835mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4539.15mil|Location2.X=5024.709mil|Location1.Y=4550.921mil|Location2.Y=4671.835mil|Absolute=True">Un-Routed Net Constraint: Net VM Between Pad C1-1(90.171mm,92.563mm) on Top Layer And Pad Q1-2(101.426mm,90.47mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4343.362mil|Location2.X=4618.016mil|Location1.Y=4624.465mil|Location2.Y=4671.835mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4343.362mil|Location2.X=4618.016mil|Location1.Y=4624.465mil|Location2.Y=4671.835mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C4-2(85.198mm,92.563mm) on Top Layer And Pad C1-2(91.421mm,92.563mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3804.15mil|Location2.X=4078.803mil|Location1.Y=4624.465mil|Location2.Y=4671.835mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3804.15mil|Location2.X=4078.803mil|Location1.Y=4624.465mil|Location2.Y=4671.835mil|Absolute=True">Un-Routed Net Constraint: Net VM Between Pad C2-1(71.502mm,92.563mm) on Top Layer And Pad C3-1(77.725mm,92.563mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2738.362mil|Location2.X=3833.803mil|Location1.Y=4624.465mil|Location2.Y=4671.835mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2738.362mil|Location2.X=3833.803mil|Location1.Y=4624.465mil|Location2.Y=4671.835mil|Absolute=True">Un-Routed Net Constraint: Net VM Between Pad C6-2(44.431mm,92.563mm) on Top Layer And Pad C2-1(71.502mm,92.563mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3853.362mil|Location2.X=4128.016mil|Location1.Y=4624.465mil|Location2.Y=4671.835mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3853.362mil|Location2.X=4128.016mil|Location1.Y=4624.465mil|Location2.Y=4671.835mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C2-2(72.752mm,92.563mm) on Top Layer And Pad C3-2(78.975mm,92.563mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3618.756mil|Location2.X=3883.016mil|Location1.Y=4183.008mil|Location2.Y=4671.835mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3618.756mil|Location2.X=3883.016mil|Location1.Y=4183.008mil|Location2.Y=4671.835mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad R2-2(66.793mm,81mm) on Top Layer And Pad C2-2(72.752mm,92.563mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4049.15mil|Location2.X=4323.803mil|Location1.Y=4624.465mil|Location2.Y=4671.835mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4049.15mil|Location2.X=4323.803mil|Location1.Y=4624.465mil|Location2.Y=4671.835mil|Absolute=True">Un-Routed Net Constraint: Net VM Between Pad C3-1(77.725mm,92.563mm) on Top Layer And Pad C4-1(83.948mm,92.563mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4098.362mil|Location2.X=4373.016mil|Location1.Y=4624.465mil|Location2.Y=4671.835mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4098.362mil|Location2.X=4373.016mil|Location1.Y=4624.465mil|Location2.Y=4671.835mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C3-2(78.975mm,92.563mm) on Top Layer And Pad C4-2(85.198mm,92.563mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1976.315mil|Location2.X=2963.803mil|Location1.Y=3355.252mil|Location2.Y=4671.835mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1976.315mil|Location2.X=2963.803mil|Location1.Y=3355.252mil|Location2.Y=4671.835mil|Absolute=True">Un-Routed Net Constraint: Net NetC5_1 Between Pad U1-14(25.45mm,59.975mm) on Top Layer And Pad C5-1(49.404mm,92.563mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1976.315mil|Location2.X=3013.016mil|Location1.Y=3329.661mil|Location2.Y=4671.835mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1976.315mil|Location2.X=3013.016mil|Location1.Y=3329.661mil|Location2.Y=4671.835mil|Absolute=True">Un-Routed Net Constraint: Net NetC5_2 Between Pad U1-13(25.45mm,59.325mm) on Top Layer And Pad C5-2(50.654mm,92.563mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1976.315mil|Location2.X=2718.803mil|Location1.Y=3304.071mil|Location2.Y=4671.835mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1976.315mil|Location2.X=2718.803mil|Location1.Y=3304.071mil|Location2.Y=4671.835mil|Absolute=True">Un-Routed Net Constraint: Net VCP Between Pad U1-12(25.45mm,58.675mm) on Top Layer And Pad C6-1(43.181mm,92.563mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2368.047mil|Location2.X=2768.016mil|Location1.Y=3555.449mil|Location2.Y=4671.835mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2368.047mil|Location2.X=2768.016mil|Location1.Y=3555.449mil|Location2.Y=4671.835mil|Absolute=True">Un-Routed Net Constraint: Net VM Between Pad J2-1(35.5mm,65.66mm) on Multi-Layer And Pad C6-2(44.431mm,92.563mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1462.535mil|Location2.X=5024.709mil|Location1.Y=3516.079mil|Location2.Y=4655.378mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1462.535mil|Location2.X=5024.709mil|Location1.Y=3516.079mil|Location2.Y=4655.378mil|Absolute=True">Un-Routed Net Constraint: Net VIN Between Pad J1-1(12.5mm,64.66mm) on Multi-Layer And Pad Q1-1(101.426mm,92.37mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1323.756mil|Location2.X=1529.591mil|Location1.Y=3416.079mil|Location2.Y=4173.291mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1323.756mil|Location2.X=1529.591mil|Location1.Y=3416.079mil|Location2.Y=4173.291mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad R5-1(8.5mm,80.25mm) on Top Layer And Pad J1-2(12.5mm,62.12mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1462.535mil|Location2.X=2035.496mil|Location1.Y=3380.842mil|Location2.Y=3483.134mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1462.535mil|Location2.X=2035.496mil|Location1.Y=3380.842mil|Location2.Y=3483.134mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J1-2(12.5mm,62.12mm) on Multi-Layer And Pad U1-15(25.45mm,60.625mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1462.535mil|Location2.X=1803.213mil|Location1.Y=3227.299mil|Location2.Y=3383.134mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1462.535mil|Location2.X=1803.213mil|Location1.Y=3227.299mil|Location2.Y=3383.134mil|Absolute=True">Un-Routed Net Constraint: Net OUT1 Between Pad J1-3(12.5mm,59.58mm) on Multi-Layer And Pad U1-8(19.55mm,56.725mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1462.535mil|Location2.X=2035.496mil|Location1.Y=3216.079mil|Location2.Y=3283.134mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1462.535mil|Location2.X=2035.496mil|Location1.Y=3216.079mil|Location2.Y=3283.134mil|Absolute=True">Un-Routed Net Constraint: Net OUT2 Between Pad J1-4(12.5mm,57.04mm) on Multi-Layer And Pad U1-10(25.45mm,57.375mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1462.535mil|Location2.X=1803.213mil|Location1.Y=3116.079mil|Location2.Y=3272.701mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1462.535mil|Location2.X=1803.213mil|Location1.Y=3116.079mil|Location2.Y=3272.701mil|Absolute=True">Un-Routed Net Constraint: Net IMODE Between Pad J1-5(12.5mm,54.5mm) on Multi-Layer And Pad U1-7(19.55mm,57.375mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1462.535mil|Location2.X=1803.213mil|Location1.Y=3016.079mil|Location2.Y=3349.472mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1462.535mil|Location2.X=1803.213mil|Location1.Y=3016.079mil|Location2.Y=3349.472mil|Absolute=True">Un-Routed Net Constraint: Net nFAULT Between Pad J1-6(12.5mm,51.96mm) on Multi-Layer And Pad U1-4(19.55mm,59.325mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1462.535mil|Location2.X=1803.213mil|Location1.Y=2916.079mil|Location2.Y=3298.291mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1462.535mil|Location2.X=1803.213mil|Location1.Y=2916.079mil|Location2.Y=3298.291mil|Absolute=True">Un-Routed Net Constraint: Net CS Between Pad J1-7(12.5mm,49.42mm) on Multi-Layer And Pad U1-6(19.55mm,58.025mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1976.315mil|Location2.X=2435.102mil|Location1.Y=3278.48mil|Location2.Y=3622.504mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1976.315mil|Location2.X=2435.102mil|Location1.Y=3278.48mil|Location2.Y=3622.504mil|Absolute=True">Un-Routed Net Constraint: Net VM Between Pad U1-11(25.45mm,58.025mm) on Top Layer And Pad J2-1(35.5mm,65.66mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2368.047mil|Location2.X=3233.409mil|Location1.Y=3455.449mil|Location2.Y=4202.819mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2368.047mil|Location2.X=3233.409mil|Location1.Y=3455.449mil|Location2.Y=4202.819mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J2-2(35.5mm,63.12mm) on Multi-Layer And Pad R4-2(56.252mm,81mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1976.315mil|Location2.X=2435.102mil|Location1.Y=3380.842mil|Location2.Y=3522.504mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1976.315mil|Location2.X=2435.102mil|Location1.Y=3380.842mil|Location2.Y=3522.504mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U1-15(25.45mm,60.625mm) on Top Layer And Pad J2-2(35.5mm,63.12mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1744.032mil|Location2.X=2435.102mil|Location1.Y=3355.449mil|Location2.Y=3426.244mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1744.032mil|Location2.X=2435.102mil|Location1.Y=3355.449mil|Location2.Y=3426.244mil|Absolute=True">Un-Routed Net Constraint: Net EN/IN1 Between Pad U1-1(19.55mm,61.275mm) on Top Layer And Pad J2-3(35.5mm,60.58mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1744.032mil|Location2.X=2435.102mil|Location1.Y=3255.449mil|Location2.Y=3400.653mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1744.032mil|Location2.X=2435.102mil|Location1.Y=3255.449mil|Location2.Y=3400.653mil|Absolute=True">Un-Routed Net Constraint: Net PH/IN2 Between Pad U1-2(19.55mm,60.625mm) on Top Layer And Pad J2-4(35.5mm,58.04mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1976.315mil|Location2.X=2435.102mil|Location1.Y=3155.449mil|Location2.Y=3426.244mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1976.315mil|Location2.X=2435.102mil|Location1.Y=3155.449mil|Location2.Y=3426.244mil|Absolute=True">Un-Routed Net Constraint: Net PMODE Between Pad U1-16(25.45mm,61.275mm) on Top Layer And Pad J2-5(35.5mm,55.5mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2368.047mil|Location2.X=4838.409mil|Location1.Y=3055.449mil|Location2.Y=4202.819mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2368.047mil|Location2.X=4838.409mil|Location1.Y=3055.449mil|Location2.Y=4202.819mil|Absolute=True">Un-Routed Net Constraint: Net nSLEEP Between Pad J2-6(35.5mm,52.96mm) on Multi-Layer And Pad R1-2(97.019mm,81mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1744.032mil|Location2.X=2435.102mil|Location1.Y=3055.449mil|Location2.Y=3375.063mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1744.032mil|Location2.X=2435.102mil|Location1.Y=3055.449mil|Location2.Y=3375.063mil|Absolute=True">Un-Routed Net Constraint: Net nSLEEP Between Pad U1-3(19.55mm,59.975mm) on Top Layer And Pad J2-6(35.5mm,52.96mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1744.032mil|Location2.X=2435.102mil|Location1.Y=2955.449mil|Location2.Y=3323.882mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1744.032mil|Location2.X=2435.102mil|Location1.Y=2955.449mil|Location2.Y=3323.882mil|Absolute=True">Un-Routed Net Constraint: Net VREF Between Pad U1-5(19.55mm,58.675mm) on Top Layer And Pad J2-7(35.5mm,50.42mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3203.756mil|Location2.X=5087.701mil|Location1.Y=4153.48mil|Location2.Y=4617.976mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3203.756mil|Location2.X=5087.701mil|Location1.Y=4153.48mil|Location2.Y=4617.976mil|Absolute=True">Un-Routed Net Constraint: Net NetD1_1 Between Pad R4-1(56.252mm,80.25mm) on Top Layer And Pad Q1-3(103.026mm,91.42mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3408.756mil|Location2.X=4838.409mil|Location1.Y=4153.48mil|Location2.Y=4202.819mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3408.756mil|Location2.X=4838.409mil|Location1.Y=4153.48mil|Location2.Y=4202.819mil|Absolute=True">Un-Routed Net Constraint: Net NetR1_1 Between Pad R3-2(61.459mm,81mm) on Top Layer And Pad R1-1(97.019mm,80.25mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1744.032mil|Location2.X=3648.409mil|Location1.Y=3252.89mil|Location2.Y=4173.291mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1744.032mil|Location2.X=3648.409mil|Location1.Y=3252.89mil|Location2.Y=4173.291mil|Absolute=True">Un-Routed Net Constraint: Net IMODE Between Pad U1-7(19.55mm,57.375mm) on Top Layer And Pad R2-1(66.793mm,80.25mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3408.756mil|Location2.X=3648.409mil|Location1.Y=4153.48mil|Location2.Y=4202.819mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3408.756mil|Location2.X=3648.409mil|Location1.Y=4153.48mil|Location2.Y=4202.819mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad R3-1(61.459mm,80.25mm) on Top Layer And Pad R2-2(66.793mm,81mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3203.756mil|Location2.X=3438.409mil|Location1.Y=4153.48mil|Location2.Y=4202.819mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3203.756mil|Location2.X=3438.409mil|Location1.Y=4153.48mil|Location2.Y=4202.819mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad R4-2(56.252mm,81mm) on Top Layer And Pad R3-1(61.459mm,80.25mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1323.756mil|Location2.X=1803.213mil|Location1.Y=3278.48mil|Location2.Y=4202.819mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1323.756mil|Location2.X=1803.213mil|Location1.Y=3278.48mil|Location2.Y=4202.819mil|Absolute=True">Un-Routed Net Constraint: Net CS Between Pad R5-2(8.5mm,81mm) on Top Layer And Pad U1-6(19.55mm,58.025mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1976.315mil|Location2.X=2035.496mil|Location1.Y=3227.299mil|Location2.Y=3400.653mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1976.315mil|Location2.X=2035.496mil|Location1.Y=3227.299mil|Location2.Y=3400.653mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U1-9(25.45mm,56.725mm) on Top Layer And Pad U1-15(25.45mm,60.625mm) on Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDHJRMYBIPNLNVDUEXA0RLPASSEJ4T5EIP2QFZPODGKZ2PV5KPPQOM"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4832.784mil|Location2.X=4844.034mil|Location1.Y=4172.525mil|Location2.Y=4183.775mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4832.784mil|Location2.X=4844.034mil|Location1.Y=4172.525mil|Location2.Y=4183.775mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.247mm &lt; 0.254mm) Between Pad R1-1(97.019mm,80.25mm) on Top Layer And Pad R1-2(97.019mm,81mm) on Top Layer [Top Solder] Mask Sliver [0.247mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3642.784mil|Location2.X=3654.034mil|Location1.Y=4172.525mil|Location2.Y=4183.775mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3642.784mil|Location2.X=3654.034mil|Location1.Y=4172.525mil|Location2.Y=4183.775mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.247mm &lt; 0.254mm) Between Pad R2-1(66.793mm,80.25mm) on Top Layer And Pad R2-2(66.793mm,81mm) on Top Layer [Top Solder] Mask Sliver [0.247mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3432.784mil|Location2.X=3444.034mil|Location1.Y=4172.525mil|Location2.Y=4183.775mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3432.784mil|Location2.X=3444.034mil|Location1.Y=4172.525mil|Location2.Y=4183.775mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.247mm &lt; 0.254mm) Between Pad R3-1(61.459mm,80.25mm) on Top Layer And Pad R3-2(61.459mm,81mm) on Top Layer [Top Solder] Mask Sliver [0.247mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3227.784mil|Location2.X=3239.034mil|Location1.Y=4172.525mil|Location2.Y=4183.775mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3227.784mil|Location2.X=3239.034mil|Location1.Y=4172.525mil|Location2.Y=4183.775mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.247mm &lt; 0.254mm) Between Pad R4-1(56.252mm,80.25mm) on Top Layer And Pad R4-2(56.252mm,81mm) on Top Layer [Top Solder] Mask Sliver [0.247mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1347.784mil|Location2.X=1359.034mil|Location1.Y=4172.525mil|Location2.Y=4183.775mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1347.784mil|Location2.X=1359.034mil|Location1.Y=4172.525mil|Location2.Y=4183.775mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.247mm &lt; 0.254mm) Between Pad R5-1(8.5mm,80.25mm) on Top Layer And Pad R5-2(8.5mm,81mm) on Top Layer [Top Solder] Mask Sliver [0.247mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1787.682mil|Location2.X=1798.932mil|Location1.Y=3397.918mil|Location2.Y=3409.168mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1787.682mil|Location2.X=1798.932mil|Location1.Y=3397.918mil|Location2.Y=3409.168mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-1(19.55mm,61.275mm) on Top Layer And Pad U1-2(19.55mm,60.625mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2019.966mil|Location2.X=2031.216mil|Location1.Y=3269.965mil|Location2.Y=3281.215mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2019.966mil|Location2.X=2031.216mil|Location1.Y=3269.965mil|Location2.Y=3281.215mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-10(25.45mm,57.375mm) on Top Layer And Pad U1-11(25.45mm,58.025mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2019.966mil|Location2.X=2031.216mil|Location1.Y=3244.375mil|Location2.Y=3255.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2019.966mil|Location2.X=2031.216mil|Location1.Y=3244.375mil|Location2.Y=3255.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-10(25.45mm,57.375mm) on Top Layer And Pad U1-9(25.45mm,56.725mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2019.966mil|Location2.X=2031.216mil|Location1.Y=3295.556mil|Location2.Y=3306.806mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2019.966mil|Location2.X=2031.216mil|Location1.Y=3295.556mil|Location2.Y=3306.806mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-11(25.45mm,58.025mm) on Top Layer And Pad U1-12(25.45mm,58.675mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2019.966mil|Location2.X=2031.216mil|Location1.Y=3321.146mil|Location2.Y=3332.396mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2019.966mil|Location2.X=2031.216mil|Location1.Y=3321.146mil|Location2.Y=3332.396mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-12(25.45mm,58.675mm) on Top Layer And Pad U1-13(25.45mm,59.325mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2019.966mil|Location2.X=2031.216mil|Location1.Y=3346.737mil|Location2.Y=3357.987mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2019.966mil|Location2.X=2031.216mil|Location1.Y=3346.737mil|Location2.Y=3357.987mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-13(25.45mm,59.325mm) on Top Layer And Pad U1-14(25.45mm,59.975mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2019.966mil|Location2.X=2031.216mil|Location1.Y=3372.328mil|Location2.Y=3383.578mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2019.966mil|Location2.X=2031.216mil|Location1.Y=3372.328mil|Location2.Y=3383.578mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-14(25.45mm,59.975mm) on Top Layer And Pad U1-15(25.45mm,60.625mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2019.966mil|Location2.X=2031.216mil|Location1.Y=3397.918mil|Location2.Y=3409.168mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2019.966mil|Location2.X=2031.216mil|Location1.Y=3397.918mil|Location2.Y=3409.168mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-15(25.45mm,60.625mm) on Top Layer And Pad U1-16(25.45mm,61.275mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1787.682mil|Location2.X=1798.932mil|Location1.Y=3372.328mil|Location2.Y=3383.578mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1787.682mil|Location2.X=1798.932mil|Location1.Y=3372.328mil|Location2.Y=3383.578mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-2(19.55mm,60.625mm) on Top Layer And Pad U1-3(19.55mm,59.975mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1787.682mil|Location2.X=1798.932mil|Location1.Y=3346.737mil|Location2.Y=3357.987mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1787.682mil|Location2.X=1798.932mil|Location1.Y=3346.737mil|Location2.Y=3357.987mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-3(19.55mm,59.975mm) on Top Layer And Pad U1-4(19.55mm,59.325mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1787.682mil|Location2.X=1798.932mil|Location1.Y=3321.146mil|Location2.Y=3332.396mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1787.682mil|Location2.X=1798.932mil|Location1.Y=3321.146mil|Location2.Y=3332.396mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-4(19.55mm,59.325mm) on Top Layer And Pad U1-5(19.55mm,58.675mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1787.682mil|Location2.X=1798.932mil|Location1.Y=3295.556mil|Location2.Y=3306.806mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1787.682mil|Location2.X=1798.932mil|Location1.Y=3295.556mil|Location2.Y=3306.806mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-5(19.55mm,58.675mm) on Top Layer And Pad U1-6(19.55mm,58.025mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1787.682mil|Location2.X=1798.932mil|Location1.Y=3269.965mil|Location2.Y=3281.215mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1787.682mil|Location2.X=1798.932mil|Location1.Y=3269.965mil|Location2.Y=3281.215mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-6(19.55mm,58.025mm) on Top Layer And Pad U1-7(19.55mm,57.375mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1787.682mil|Location2.X=1798.932mil|Location1.Y=3244.375mil|Location2.Y=3255.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1787.682mil|Location2.X=1798.932mil|Location1.Y=3244.375mil|Location2.Y=3255.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U1-7(19.55mm,57.375mm) on Top Layer And Pad U1-8(19.55mm,56.725mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDZZ1IOMFZUEUT4YCSL5C4HCMU254QLVDXO41QPFAC0NGNQSTF4B"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4559.178mil|Location2.X=4570.428mil|Location1.Y=4619.651mil|Location2.Y=4630.901mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4559.178mil|Location2.X=4570.428mil|Location1.Y=4619.651mil|Location2.Y=4630.901mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.162mm &lt; 0.254mm) Between Pad C1-1(90.171mm,92.563mm) on Top Layer And Track (89.399mm,91.801mm)(92.193mm,91.801mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.162mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4537.525mil|Location2.X=4548.775mil|Location1.Y=4665.399mil|Location2.Y=4676.649mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4537.525mil|Location2.X=4548.775mil|Location1.Y=4665.399mil|Location2.Y=4676.649mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.162mm &lt; 0.254mm) Between Pad C1-1(90.171mm,92.563mm) on Top Layer And Track (89.399mm,93.325mm)(92.193mm,93.325mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.162mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4608.391mil|Location2.X=4619.641mil|Location1.Y=4619.651mil|Location2.Y=4630.901mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4608.391mil|Location2.X=4619.641mil|Location1.Y=4619.651mil|Location2.Y=4630.901mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.162mm &lt; 0.254mm) Between Pad C1-2(91.421mm,92.563mm) on Top Layer And Track (89.399mm,91.801mm)(92.193mm,91.801mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.162mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4586.737mil|Location2.X=4597.987mil|Location1.Y=4665.399mil|Location2.Y=4676.649mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4586.737mil|Location2.X=4597.987mil|Location1.Y=4665.399mil|Location2.Y=4676.649mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.162mm &lt; 0.254mm) Between Pad C1-2(91.421mm,92.563mm) on Top Layer And Track (89.399mm,93.325mm)(92.193mm,93.325mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.162mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3824.178mil|Location2.X=3835.428mil|Location1.Y=4619.651mil|Location2.Y=4630.901mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3824.178mil|Location2.X=3835.428mil|Location1.Y=4619.651mil|Location2.Y=4630.901mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.162mm &lt; 0.254mm) Between Pad C2-1(71.502mm,92.563mm) on Top Layer And Track (70.73mm,91.801mm)(73.524mm,91.801mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.162mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3802.525mil|Location2.X=3813.775mil|Location1.Y=4665.399mil|Location2.Y=4676.649mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3802.525mil|Location2.X=3813.775mil|Location1.Y=4665.399mil|Location2.Y=4676.649mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.162mm &lt; 0.254mm) Between Pad C2-1(71.502mm,92.563mm) on Top Layer And Track (70.73mm,93.325mm)(73.524mm,93.325mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.162mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3873.391mil|Location2.X=3884.641mil|Location1.Y=4619.651mil|Location2.Y=4630.901mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3873.391mil|Location2.X=3884.641mil|Location1.Y=4619.651mil|Location2.Y=4630.901mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.162mm &lt; 0.254mm) Between Pad C2-2(72.752mm,92.563mm) on Top Layer And Track (70.73mm,91.801mm)(73.524mm,91.801mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.162mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3851.737mil|Location2.X=3862.987mil|Location1.Y=4665.399mil|Location2.Y=4676.649mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3851.737mil|Location2.X=3862.987mil|Location1.Y=4665.399mil|Location2.Y=4676.649mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.162mm &lt; 0.254mm) Between Pad C2-2(72.752mm,92.563mm) on Top Layer And Track (70.73mm,93.325mm)(73.524mm,93.325mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.162mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4069.178mil|Location2.X=4080.428mil|Location1.Y=4619.651mil|Location2.Y=4630.901mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4069.178mil|Location2.X=4080.428mil|Location1.Y=4619.651mil|Location2.Y=4630.901mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.162mm &lt; 0.254mm) Between Pad C3-1(77.725mm,92.563mm) on Top Layer And Track (76.953mm,91.801mm)(79.747mm,91.801mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.162mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4047.525mil|Location2.X=4058.775mil|Location1.Y=4665.399mil|Location2.Y=4676.649mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4047.525mil|Location2.X=4058.775mil|Location1.Y=4665.399mil|Location2.Y=4676.649mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.162mm &lt; 0.254mm) Between Pad C3-1(77.725mm,92.563mm) on Top Layer And Track (76.953mm,93.325mm)(79.747mm,93.325mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.162mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4118.391mil|Location2.X=4129.641mil|Location1.Y=4619.651mil|Location2.Y=4630.901mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4118.391mil|Location2.X=4129.641mil|Location1.Y=4619.651mil|Location2.Y=4630.901mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.162mm &lt; 0.254mm) Between Pad C3-2(78.975mm,92.563mm) on Top Layer And Track (76.953mm,91.801mm)(79.747mm,91.801mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.162mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4096.737mil|Location2.X=4107.987mil|Location1.Y=4665.399mil|Location2.Y=4676.649mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4096.737mil|Location2.X=4107.987mil|Location1.Y=4665.399mil|Location2.Y=4676.649mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.162mm &lt; 0.254mm) Between Pad C3-2(78.975mm,92.563mm) on Top Layer And Track (76.953mm,93.325mm)(79.747mm,93.325mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.162mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4314.178mil|Location2.X=4325.428mil|Location1.Y=4619.651mil|Location2.Y=4630.901mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4314.178mil|Location2.X=4325.428mil|Location1.Y=4619.651mil|Location2.Y=4630.901mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.162mm &lt; 0.254mm) Between Pad C4-1(83.948mm,92.563mm) on Top Layer And Track (83.176mm,91.801mm)(85.97mm,91.801mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.162mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4292.525mil|Location2.X=4303.775mil|Location1.Y=4665.399mil|Location2.Y=4676.649mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4292.525mil|Location2.X=4303.775mil|Location1.Y=4665.399mil|Location2.Y=4676.649mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.162mm &lt; 0.254mm) Between Pad C4-1(83.948mm,92.563mm) on Top Layer And Track (83.176mm,93.325mm)(85.97mm,93.325mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.162mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4363.391mil|Location2.X=4374.641mil|Location1.Y=4619.651mil|Location2.Y=4630.901mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4363.391mil|Location2.X=4374.641mil|Location1.Y=4619.651mil|Location2.Y=4630.901mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.162mm &lt; 0.254mm) Between Pad C4-2(85.198mm,92.563mm) on Top Layer And Track (83.176mm,91.801mm)(85.97mm,91.801mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.162mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4341.737mil|Location2.X=4352.987mil|Location1.Y=4665.399mil|Location2.Y=4676.649mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4341.737mil|Location2.X=4352.987mil|Location1.Y=4665.399mil|Location2.Y=4676.649mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.162mm &lt; 0.254mm) Between Pad C4-2(85.198mm,92.563mm) on Top Layer And Track (83.176mm,93.325mm)(85.97mm,93.325mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.162mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2954.178mil|Location2.X=2965.428mil|Location1.Y=4619.651mil|Location2.Y=4630.901mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2954.178mil|Location2.X=2965.428mil|Location1.Y=4619.651mil|Location2.Y=4630.901mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.162mm &lt; 0.254mm) Between Pad C5-1(49.404mm,92.563mm) on Top Layer And Track (48.632mm,91.801mm)(51.426mm,91.801mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.162mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2932.525mil|Location2.X=2943.775mil|Location1.Y=4665.399mil|Location2.Y=4676.649mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2932.525mil|Location2.X=2943.775mil|Location1.Y=4665.399mil|Location2.Y=4676.649mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.162mm &lt; 0.254mm) Between Pad C5-1(49.404mm,92.563mm) on Top Layer And Track (48.632mm,93.325mm)(51.426mm,93.325mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.162mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3003.391mil|Location2.X=3014.641mil|Location1.Y=4619.651mil|Location2.Y=4630.901mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3003.391mil|Location2.X=3014.641mil|Location1.Y=4619.651mil|Location2.Y=4630.901mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.162mm &lt; 0.254mm) Between Pad C5-2(50.654mm,92.563mm) on Top Layer And Track (48.632mm,91.801mm)(51.426mm,91.801mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.162mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2981.737mil|Location2.X=2992.987mil|Location1.Y=4665.399mil|Location2.Y=4676.649mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2981.737mil|Location2.X=2992.987mil|Location1.Y=4665.399mil|Location2.Y=4676.649mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.162mm &lt; 0.254mm) Between Pad C5-2(50.654mm,92.563mm) on Top Layer And Track (48.632mm,93.325mm)(51.426mm,93.325mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.162mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2709.178mil|Location2.X=2720.428mil|Location1.Y=4619.651mil|Location2.Y=4630.901mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2709.178mil|Location2.X=2720.428mil|Location1.Y=4619.651mil|Location2.Y=4630.901mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.162mm &lt; 0.254mm) Between Pad C6-1(43.181mm,92.563mm) on Top Layer And Track (42.409mm,91.801mm)(45.203mm,91.801mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.162mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2687.525mil|Location2.X=2698.775mil|Location1.Y=4665.399mil|Location2.Y=4676.649mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2687.525mil|Location2.X=2698.775mil|Location1.Y=4665.399mil|Location2.Y=4676.649mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.162mm &lt; 0.254mm) Between Pad C6-1(43.181mm,92.563mm) on Top Layer And Track (42.409mm,93.325mm)(45.203mm,93.325mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.162mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2758.391mil|Location2.X=2769.641mil|Location1.Y=4619.651mil|Location2.Y=4630.901mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2758.391mil|Location2.X=2769.641mil|Location1.Y=4619.651mil|Location2.Y=4630.901mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.162mm &lt; 0.254mm) Between Pad C6-2(44.431mm,92.563mm) on Top Layer And Track (42.409mm,91.801mm)(45.203mm,91.801mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.162mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2736.737mil|Location2.X=2747.987mil|Location1.Y=4665.399mil|Location2.Y=4676.649mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2736.737mil|Location2.X=2747.987mil|Location1.Y=4665.399mil|Location2.Y=4676.649mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.162mm &lt; 0.254mm) Between Pad C6-2(44.431mm,92.563mm) on Top Layer And Track (42.409mm,93.325mm)(45.203mm,93.325mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.162mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4964.866mil|Location2.X=4976.116mil|Location1.Y=4624.1mil|Location2.Y=4635.35mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4964.866mil|Location2.X=4976.116mil|Location1.Y=4624.1mil|Location2.Y=4635.35mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.151mm &lt; 0.254mm) Between Pad Q1-1(101.426mm,92.37mm) on Top Layer And Track (100.575mm,89.92mm)(100.575mm,92.92mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.151mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4967.84mil|Location2.X=4979.09mil|Location1.Y=4649.198mil|Location2.Y=4660.448mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4967.84mil|Location2.X=4979.09mil|Location1.Y=4649.198mil|Location2.Y=4660.448mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.175mm &lt; 0.254mm) Between Pad Q1-1(101.426mm,92.37mm) on Top Layer And Track (100.575mm,92.92mm)(102.986mm,92.92mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.175mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4964.866mil|Location2.X=4976.116mil|Location1.Y=4549.296mil|Location2.Y=4560.546mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4964.866mil|Location2.X=4976.116mil|Location1.Y=4549.296mil|Location2.Y=4560.546mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.151mm &lt; 0.254mm) Between Pad Q1-2(101.426mm,90.47mm) on Top Layer And Track (100.575mm,89.92mm)(100.575mm,92.92mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.151mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5015.084mil|Location2.X=5026.334mil|Location1.Y=4545.851mil|Location2.Y=4557.101mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5015.084mil|Location2.X=5026.334mil|Location1.Y=4545.851mil|Location2.Y=4557.101mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.175mm &lt; 0.254mm) Between Pad Q1-2(101.426mm,90.47mm) on Top Layer And Track (100.575mm,89.92mm)(102.986mm,89.92mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.175mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4804.512mil|Location2.X=4815.762mil|Location1.Y=4151.855mil|Location2.Y=4163.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4804.512mil|Location2.X=4815.762mil|Location1.Y=4151.855mil|Location2.Y=4163.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.254mm) Between Pad R1-1(97.019mm,80.25mm) on Top Layer And Track (96.511mm,79.609mm)(96.511mm,81.641mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4831.403mil|Location2.X=4842.653mil|Location1.Y=4151.855mil|Location2.Y=4163.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4831.403mil|Location2.X=4842.653mil|Location1.Y=4151.855mil|Location2.Y=4163.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.254mm) Between Pad R1-1(97.019mm,80.25mm) on Top Layer And Track (97.527mm,79.609mm)(97.527mm,81.641mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4804.512mil|Location2.X=4815.762mil|Location1.Y=4181.383mil|Location2.Y=4192.633mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4804.512mil|Location2.X=4815.762mil|Location1.Y=4181.383mil|Location2.Y=4192.633mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.254mm) Between Pad R1-2(97.019mm,81mm) on Top Layer And Track (96.511mm,79.609mm)(96.511mm,81.641mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4831.403mil|Location2.X=4842.653mil|Location1.Y=4181.383mil|Location2.Y=4192.633mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4831.403mil|Location2.X=4842.653mil|Location1.Y=4181.383mil|Location2.Y=4192.633mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.254mm) Between Pad R1-2(97.019mm,81mm) on Top Layer And Track (97.527mm,79.609mm)(97.527mm,81.641mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3614.512mil|Location2.X=3625.762mil|Location1.Y=4151.855mil|Location2.Y=4163.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3614.512mil|Location2.X=3625.762mil|Location1.Y=4151.855mil|Location2.Y=4163.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.254mm) Between Pad R2-1(66.793mm,80.25mm) on Top Layer And Track (66.285mm,79.609mm)(66.285mm,81.641mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3641.403mil|Location2.X=3652.653mil|Location1.Y=4151.855mil|Location2.Y=4163.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3641.403mil|Location2.X=3652.653mil|Location1.Y=4151.855mil|Location2.Y=4163.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.254mm) Between Pad R2-1(66.793mm,80.25mm) on Top Layer And Track (67.301mm,79.609mm)(67.301mm,81.641mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3614.512mil|Location2.X=3625.762mil|Location1.Y=4181.383mil|Location2.Y=4192.633mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3614.512mil|Location2.X=3625.762mil|Location1.Y=4181.383mil|Location2.Y=4192.633mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.254mm) Between Pad R2-2(66.793mm,81mm) on Top Layer And Track (66.285mm,79.609mm)(66.285mm,81.641mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3641.403mil|Location2.X=3652.653mil|Location1.Y=4181.383mil|Location2.Y=4192.633mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3641.403mil|Location2.X=3652.653mil|Location1.Y=4181.383mil|Location2.Y=4192.633mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.254mm) Between Pad R2-2(66.793mm,81mm) on Top Layer And Track (67.301mm,79.609mm)(67.301mm,81.641mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3404.512mil|Location2.X=3415.762mil|Location1.Y=4151.855mil|Location2.Y=4163.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3404.512mil|Location2.X=3415.762mil|Location1.Y=4151.855mil|Location2.Y=4163.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.254mm) Between Pad R3-1(61.459mm,80.25mm) on Top Layer And Track (60.951mm,79.609mm)(60.951mm,81.641mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3431.403mil|Location2.X=3442.653mil|Location1.Y=4151.855mil|Location2.Y=4163.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3431.403mil|Location2.X=3442.653mil|Location1.Y=4151.855mil|Location2.Y=4163.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.254mm) Between Pad R3-1(61.459mm,80.25mm) on Top Layer And Track (61.967mm,79.609mm)(61.967mm,81.641mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3404.512mil|Location2.X=3415.762mil|Location1.Y=4181.383mil|Location2.Y=4192.633mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3404.512mil|Location2.X=3415.762mil|Location1.Y=4181.383mil|Location2.Y=4192.633mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.254mm) Between Pad R3-2(61.459mm,81mm) on Top Layer And Track (60.951mm,79.609mm)(60.951mm,81.641mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3431.403mil|Location2.X=3442.653mil|Location1.Y=4181.383mil|Location2.Y=4192.633mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3431.403mil|Location2.X=3442.653mil|Location1.Y=4181.383mil|Location2.Y=4192.633mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.254mm) Between Pad R3-2(61.459mm,81mm) on Top Layer And Track (61.967mm,79.609mm)(61.967mm,81.641mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3199.512mil|Location2.X=3210.762mil|Location1.Y=4151.855mil|Location2.Y=4163.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3199.512mil|Location2.X=3210.762mil|Location1.Y=4151.855mil|Location2.Y=4163.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.254mm) Between Pad R4-1(56.252mm,80.25mm) on Top Layer And Track (55.744mm,79.609mm)(55.744mm,81.641mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3226.403mil|Location2.X=3237.653mil|Location1.Y=4151.855mil|Location2.Y=4163.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3226.403mil|Location2.X=3237.653mil|Location1.Y=4151.855mil|Location2.Y=4163.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.254mm) Between Pad R4-1(56.252mm,80.25mm) on Top Layer And Track (56.76mm,79.609mm)(56.76mm,81.641mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3199.512mil|Location2.X=3210.762mil|Location1.Y=4181.383mil|Location2.Y=4192.633mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3199.512mil|Location2.X=3210.762mil|Location1.Y=4181.383mil|Location2.Y=4192.633mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.254mm) Between Pad R4-2(56.252mm,81mm) on Top Layer And Track (55.744mm,79.609mm)(55.744mm,81.641mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3226.403mil|Location2.X=3237.653mil|Location1.Y=4181.383mil|Location2.Y=4192.633mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3226.403mil|Location2.X=3237.653mil|Location1.Y=4181.383mil|Location2.Y=4192.633mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.254mm) Between Pad R4-2(56.252mm,81mm) on Top Layer And Track (56.76mm,79.609mm)(56.76mm,81.641mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1319.512mil|Location2.X=1330.762mil|Location1.Y=4151.855mil|Location2.Y=4163.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1319.512mil|Location2.X=1330.762mil|Location1.Y=4151.855mil|Location2.Y=4163.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.254mm) Between Pad R5-1(8.5mm,80.25mm) on Top Layer And Track (7.992mm,79.609mm)(7.992mm,81.641mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1346.402mil|Location2.X=1357.652mil|Location1.Y=4151.855mil|Location2.Y=4163.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1346.402mil|Location2.X=1357.652mil|Location1.Y=4151.855mil|Location2.Y=4163.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.254mm) Between Pad R5-1(8.5mm,80.25mm) on Top Layer And Track (9.008mm,79.609mm)(9.008mm,81.641mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1319.512mil|Location2.X=1330.762mil|Location1.Y=4181.383mil|Location2.Y=4192.633mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1319.512mil|Location2.X=1330.762mil|Location1.Y=4181.383mil|Location2.Y=4192.633mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.254mm) Between Pad R5-2(8.5mm,81mm) on Top Layer And Track (7.992mm,79.609mm)(7.992mm,81.641mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1346.402mil|Location2.X=1357.652mil|Location1.Y=4181.383mil|Location2.Y=4192.633mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1346.402mil|Location2.X=1357.652mil|Location1.Y=4181.383mil|Location2.Y=4192.633mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.254mm) Between Pad R5-2(8.5mm,81mm) on Top Layer And Track (9.008mm,79.609mm)(9.008mm,81.641mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDXUY5PA0LSNYYJBVNFPZ2EJZC0KFNCX5ZE2GDYKO5ZCUOG4GC55ZN"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Room DRV8874 motor driver (Bounding Region = (30.444mm, 100.537mm, 129.758mm, 122.508mm) (InComponentClass('DRV8874 motor driver'))</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1198.583mil|Location2.X=5108.583mil|Location1.Y=3215.551mil|Location2.Y=4823.15mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1198.583mil|Location2.X=5108.583mil|Location1.Y=3215.551mil|Location2.Y=4823.15mil|Absolute=True">Room Definition: Between Component U1-https://www.digikey.com/en/products/base-product/texas-instruments/296/DRV8874/21713 (22.5mm,59mm) on Top Layer And Room DRV8874 motor driver (Bounding Region = (30.444mm, 100.537mm, 129.758mm, 122.508mm) (InComponentClass('DRV8874 motor driver')) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1198.583mil|Location2.X=5108.583mil|Location1.Y=2873.701mil|Location2.Y=4823.15mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1198.583mil|Location2.X=5108.583mil|Location1.Y=2873.701mil|Location2.Y=4823.15mil|Absolute=True">Room Definition: Between Room DRV8874 motor driver (Bounding Region = (30.444mm, 100.537mm, 129.758mm, 122.508mm) (InComponentClass('DRV8874 motor driver')) And SIP Component J1-pin header (8.182mm,64.66mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1198.583mil|Location2.X=5108.583mil|Location1.Y=2913.071mil|Location2.Y=4823.15mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1198.583mil|Location2.X=5108.583mil|Location1.Y=2913.071mil|Location2.Y=4823.15mil|Absolute=True">Room Definition: Between Room DRV8874 motor driver (Bounding Region = (30.444mm, 100.537mm, 129.758mm, 122.508mm) (InComponentClass('DRV8874 motor driver')) And SIP Component J2-pin header (31.182mm,65.66mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1189.242mil|Location2.X=5108.583mil|Location1.Y=3958.15mil|Location2.Y=4853.323mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\modes\OneDrive\Documents\pcb task ALEXEAGLES\TASK 2 AE\DRV8874 motor driver\DRV8874 motor driver.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1189.242mil|Location2.X=5108.583mil|Location1.Y=3958.15mil|Location2.Y=4853.323mil|Absolute=True">Room Definition: Between Room DRV8874 motor driver (Bounding Region = (30.444mm, 100.537mm, 129.758mm, 122.508mm) (InComponentClass('DRV8874 motor driver')) And SMT Small Component R5-2.49K (8.5mm,80.625mm) on Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
